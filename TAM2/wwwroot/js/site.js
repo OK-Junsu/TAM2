@@ -1,9 +1,9 @@
 ﻿const uri = "api/Attendances";
-let attendances = [];
+//let attendances = [];
 
 function getItems() {
     fetch(uri)
-        .then((response) => response.json())
+        .then(response => response.json())
         .then(data => _displayItems(data))
         .catch(error => console.error('Unable to get items.', error));
 }
@@ -41,16 +41,6 @@ function deleteItem(id) {
     })
         .then(() => getItems())
         .catch(error => console.error('Unable to delete item.', error));
-}
-
-function displayEditForm(id) {
-    const item = attendances.find(item => item.id === id);
-
-    document.getElementById('edit-id').value = item.id;
-    document.getElementById('edit-name').value = item.name;
-    document.getElementById('edit-arrive').value = item.arrive;
-    document.getElementById('edit-leave').value = item.leave;
-    document.getElementById('editForm').style.display = 'block';
 }
 
 function updateItem() {
@@ -99,7 +89,7 @@ function _displayItems(data) {
     data.forEach(item => {
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
-        editButton.setAttribute('onclick', `displayEditForm(${item.id})`);
+        editButton.setAttribute('onclick', `moveToEditPage(${item.id})`);
 
         let deleteButton = button.cloneNode(false);
         deleteButton.innerText = 'Delete';
@@ -126,5 +116,42 @@ function _displayItems(data) {
         td5.appendChild(deleteButton);
     });
 
-    attendances = data;
+    //attendances = data;
+}
+
+function moveToEditPage(id) {
+    var link = `edit.html?id=${id}`;
+    window.location.href = link;
+    //    window.location.href(link);
+    //    window.open(link);
+}
+
+function getParameter(name) {
+    var rtnval = '';
+    var nowAddress = unescape(location.href);
+    var parameters = (nowAddress.slice(nowAddress.indexOf('?') + 1,
+        nowAddress.length)).split('&');
+    for (var i = 0; i < parameters.length; i++) {
+        var varName = parameters[i].split('=')[0];
+        if (varName.toUpperCase() == name.toUpperCase()) {
+            rtnval = parameters[i].split('=')[1];
+            break;
+        }
+    }
+    return rtnval;
+}
+
+function getEditData(id) {
+    fetch(`${uri}/${id}`)
+        .then(response => response.json())
+        .then(data => displayEditForm(data));
+}
+function displayEditForm(data) {
+    const item = data;
+
+    document.getElementById('edit-id').value = item.id;
+    document.getElementById('edit-name').value = item.name;
+    document.getElementById('edit-arrive').value = item.arrive;
+    document.getElementById('edit-leave').value = item.leave;
+    document.getElementById('editForm').style.display = 'block';
 }

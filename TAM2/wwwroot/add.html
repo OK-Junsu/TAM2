@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Attendance Add</title>
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <h1>Attendance CRUD</h1>
+    <h3>Add</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+        <input type="text" id="add-name" placeholder="Name"><br />
+        <input type="datetime-local" id="add-arrive" placeholder="Arrive"><br />
+        <input type="datetime-local" id="add-leave" placeholder="Leave"><br />
+        <input type="submit" value="Add">
+    </form>
+
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+    </script>
+</body>
+</html>
