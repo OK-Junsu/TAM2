@@ -8,9 +8,19 @@
 <body>
     <h1>Attendance CRUD</h1>
     <h3>Details</h3>
+    <form action="javascript:void(0);" onsubmit="moveToEditPageAtDetail()">
+        <input type="hidden" id="detail-id" readonly>
+        <input type="text" id="detail-name" readonly>
+        <input type="datetime-local" id="detail-arrive" readonly>
+        <input type="datetime-local" id="detail-leave" readonly>
+        <input type="submit" value="Edit">
+        <a onclick="moveToIndexPage()" aria-label="Close">&#10006;</a>
+    </form>
 
     <script src="js/site.js" asp-append-version="true"></script>
     <script type="text/javascript">
+        var param_id = getParameter('id');
+        getDetailData(param_id)
     </script>
 </body>
 </html>

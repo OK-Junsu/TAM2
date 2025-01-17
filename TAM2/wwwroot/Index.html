@@ -17,9 +17,14 @@
             <th>Leave</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         <tbody id="todos"></tbody>
     </table>
+
+    <form action="javascript:void(0);" onsubmit="moveToAddPage()" style="margin-top: 15px">
+        <input type="submit" value="Add" onsubmit="moveToAddPage()" />
+    </form>
 
     <script src="js/site.js" asp-append-version="true"></script>
     <script type="text/javascript">
