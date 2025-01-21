@@ -6,7 +6,16 @@
         xmlns:local="clr-namespace:TestView"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="500">
-    <Grid Background="Red">
-        <Frame x:Name="frame" NavigationUIVisibility="Hidden"/>
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="Attendance CRUD" Margin="5 0 0 0" FontSize="20" FontWeight="Bold"/>
+        <Frame Grid.Row="1" x:Name="frame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

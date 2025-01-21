@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TestView"
       xmlns:vm="clr-namespace:TestView.ViewModels"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="500"
+      d:DesignHeight="370" d:DesignWidth="500"
       Title="Index">
 
     <Page.DataContext>
@@ -20,19 +20,16 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0"
-                   Text="Attendance CRUD" Margin="5 0 0 0" FontSize="20" FontWeight="Bold"/>
-        <TextBlock Grid.Column="0" Grid.Row="1"
+        <TextBlock Grid.Row="0"
                    Text="Index" Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
-        <TextBlock Grid.Column="0" Grid.Row="2"
+        <TextBlock Grid.Row="1"
                    Text="{Binding Quantity}" Margin="5 0 0 0"/>
-        <DataGrid Grid.Column="0" Grid.Row="3" 
+        <DataGrid Grid.Row="2" 
                   Margin="5" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Attendances}" FontWeight="Bold">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" FontWeight="Normal"/>
@@ -42,27 +39,27 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Details" Click="Details_Click"/>
+                            <Button Content="Details" Click="Details_Click" FontWeight="Normal"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Edit" Click="Edit_Click"/>
+                            <Button Content="Edit" Click="Edit_Click" FontWeight="Normal"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete" Click="Delete_Click"/>
+                            <Button Content="Delete" Click="Delete_Click" FontWeight="Normal"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="5 5 0 0">
+        <StackPanel Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="5 5 0 0">
             <Button Content="Add" Width="40" Height="20" Click="Add_Click"/>
             <Button Content="Auto" Width="40" Height="20" Click="AutoAdd_Click" Margin="5 0 0 0"/>
         </StackPanel>
