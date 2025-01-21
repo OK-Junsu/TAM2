@@ -13,9 +13,12 @@ namespace TestView
         private DetailViewModel viewModel;
 
 
-        public Details(Attendance item)
+        public Details(int id)
         {
             InitializeComponent();
+
+            var json = APIFunctions.Get(Index.targetURL + id);
+            var item = APIFunctions.JsonDeserialize<Attendance>(json, true);
 
             viewModel = new()
             {

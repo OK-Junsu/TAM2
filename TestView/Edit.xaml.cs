@@ -42,6 +42,9 @@ namespace TestView
                 Leave = Convert.ToDateTime(Leave.Text)
             };
 
+            var data = APIFunctions.JsonSerialize(newItem);
+            APIFunctions.Put(Index.targetURL + newItem.Id, data);
+
             NavigationService.Navigate(new Index());
         }
     }

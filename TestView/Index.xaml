@@ -61,7 +61,6 @@
         </DataGrid>
         <StackPanel Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="5 5 0 0">
             <Button Content="Add" Width="40" Height="20" Click="Add_Click"/>
-            <Button Content="Auto" Width="40" Height="20" Click="AutoAdd_Click" Margin="5 0 0 0"/>
         </StackPanel>
     </Grid>
 </Page>

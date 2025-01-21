@@ -30,13 +30,16 @@ namespace TestView
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            //var newItem = new Attendance()
-            //{
-            //    Id = newId,
-            //    Name = Name.Text,
-            //    Arrive = Convert.ToDateTime(Arrive.Text),
-            //    Leave = Convert.ToDateTime(Leave.Text)
-            //};
+            var newItem = new Attendance()
+            {
+                Id = newId,
+                Name = Name.Text,
+                Arrive = Convert.ToDateTime(Arrive.Text),
+                Leave = Convert.ToDateTime(Leave.Text)
+            };
+
+            var data = APIFunctions.JsonSerialize(newItem);
+            APIFunctions.Post(Index.targetURL, data);
 
             NavigationService.Navigate(new Index());
         }
