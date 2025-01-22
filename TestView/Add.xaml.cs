@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using TAM2.Models;
 using TestView.ViewModels;
 
@@ -12,15 +11,27 @@ namespace TestView
     public partial class Add : Page
     {
         private DetailViewModel viewModel;
-        private int newId;
+        private readonly int id;
 
 
-        public Add(int newId)
+        public Add(int id)
         {
             InitializeComponent();
-            viewModel = this.DataContext as DetailViewModel;
 
-            this.newId = newId;
+            this.id = id;
+            SetViewModel();
+
+            DataContext = viewModel;
+        }
+
+
+        private void SetViewModel()
+        {
+            viewModel = new()
+            {
+                Arrive = DateTime.Now.ToString(),
+                Leave = DateTime.Now.ToString()
+            };
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -32,14 +43,13 @@ namespace TestView
         {
             var newItem = new Attendance()
             {
-                Id = newId,
+                Id = id,
                 Name = Name.Text,
                 Arrive = Convert.ToDateTime(Arrive.Text),
                 Leave = Convert.ToDateTime(Leave.Text)
             };
 
-            var data = APIFunctions.JsonSerialize(newItem);
-            APIFunctions.Post(Index.targetURL, data);
+            Task.Run(async () => await MainWindow.Api.Create(newItem));
 
             NavigationService.Navigate(new Index());
         }

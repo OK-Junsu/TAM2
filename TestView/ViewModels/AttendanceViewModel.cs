@@ -15,6 +15,16 @@ namespace TestView.ViewModels
             }
         }
         private string _Quantity;
-        public ObservableCollection<Attendance> Attendances { get; set; } = [];
+        
+        public ObservableCollection<Attendance> Attendances
+        {
+            get => _Attendances;
+            set
+            {
+                _Attendances = value;
+                OnPropertyChanged(nameof(Attendances));
+            }
+        }
+        private ObservableCollection<Attendance> _Attendances;
     }
 }

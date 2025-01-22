@@ -11,25 +11,32 @@ namespace TestView
     public partial class Details : Page
     {
         private DetailViewModel viewModel;
+        private readonly int id;
 
 
         public Details(int id)
         {
             InitializeComponent();
 
-            var json = APIFunctions.Get(Index.targetURL + id);
-            var item = APIFunctions.JsonDeserialize<Attendance>(json, true);
+            this.id = id;
+            SetViewModel();
+
+            DataContext = viewModel;
+        }
+
+
+        private void SetViewModel()
+        {
+            var item = Task.Run(() => MainWindow.Api.Get<Attendance>(id))?.Result ?? new();
 
             viewModel = new()
             {
                 Id = item.Id.ToString(),
-                Name = item.Name?.ToString() ?? "",
-                Arrive = item.Arrive.ToString(),
-                Leave = item.Leave.ToString()
+                Name = item.Name?.ToString() ?? string.Empty,
+                Arrive = item.Arrive.ToString() ?? DateTime.MinValue.ToString(),
+                Leave = item.Leave.ToString() ?? DateTime.MinValue.ToString()
             };
-            DataContext = viewModel;
         }
-
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
@@ -38,15 +45,7 @@ namespace TestView
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            var item = new Attendance()
-            {
-                Id = Convert.ToInt32(Id.Text),
-                Name = Name.Text,
-                Arrive = Convert.ToDateTime(Arrive.Text),
-                Leave = Convert.ToDateTime(Leave.Text)
-            };
-
-            NavigationService.Navigate(new Edit(item));
+            NavigationService.Navigate(new Edit(id));
         }
     }
 }

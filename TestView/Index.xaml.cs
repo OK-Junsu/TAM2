@@ -12,34 +12,22 @@ namespace TestView
     /// </summary>
     public partial class Index : Page
     {
-        public const string targetURL = "https://localhost:7297/api/Attendances/";
-
-        private AttendanceViewModel? viewModel { get; set; } = new();
-
-#nullable disable
+        private AttendanceViewModel viewModel = new();
 
 
         public Index()
         {
             InitializeComponent();
-
-            SetItemList();
-            SetQuantity();
+            SetViewModel();
 
             DataContext = viewModel;
         }
 
 
-        private void SetItemList()
+        private void SetViewModel()
         {
-            var jsonResult = APIFunctions.Get(targetURL);
-            viewModel.Attendances = APIFunctions.JsonDeserialize<ObservableCollection<Attendance>>(jsonResult, true);
-        }
-
-        private void SetQuantity()
-        {
-            var additional = viewModel.Attendances.Count <= 1 ? "attendance" : "attendances";
-            viewModel.Quantity = $"{viewModel.Attendances.Count} {additional}";
+            viewModel.Attendances = Task.Run(MainWindow.Api.Get<ObservableCollection<Attendance>>)?.Result ?? [];
+            viewModel.Quantity = $"{viewModel.Attendances.Count} {(viewModel.Attendances.Count <= 1 ? "attendance" : "attendances")}";
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -49,7 +37,7 @@ namespace TestView
             NavigationService.Navigate(new Add(id));
         }
 
-        private int GetIndexOfDataGrid(object sender)
+        private static int GetIndexOfDataGrid(object sender)
         {
             for (var vis = sender as Visual; vis != null; vis = VisualTreeHelper.GetParent(vis) as Visual)
                 if (vis is DataGridRow)
@@ -59,11 +47,7 @@ namespace TestView
                 }
             return -1;
         }
-        private Attendance GetItem(object sender)
-        {
-            var index = GetIndexOfDataGrid(sender);
-            return index != -1 ? viewModel.Attendances[index] : throw new ArgumentException("Can't Find Item");
-        }
+
         private int GetItemId(object sender)
         {
             var index = GetIndexOfDataGrid(sender);
@@ -79,9 +63,9 @@ namespace TestView
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            var item = GetItem(sender);
+            var id = GetItemId(sender);
 
-            NavigationService.Navigate(new Edit(item));
+            NavigationService.Navigate(new Edit(id));
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -90,7 +74,7 @@ namespace TestView
 
             if (id > 0)
             {
-                APIFunctions.Delete(targetURL + id);
+                Task.Run(() => MainWindow.Api.Delete(id));
                 NavigationService.Navigate(new Index());
             }
         }
