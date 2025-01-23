@@ -4,7 +4,7 @@ using System.Net.Http.Json;
 
 namespace TestView
 {
-    public class APIFunctions
+    public class ApiHelper
     {
         public HttpClient Client { get; init; }
         public string Uri { get; init; }
@@ -12,7 +12,7 @@ namespace TestView
         public string FullPath { get; init; }
 
 
-        public APIFunctions(string uri, string apiRoot)
+        public ApiHelper(string uri, string apiRoot)
         {
             Client = GetHttpClient(uri);
             Uri = RemoveLastSlash(uri);

@@ -70,11 +70,17 @@ namespace TestView
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            Delete(sender);
+        }
+
+        private async void Delete(object sender)
+        {
             var id = GetItemId(sender);
 
             if (id > 0)
             {
-                Task.Run(() => MainWindow.Api.Delete(id));
+                await MainWindow.Api.Delete(id);
+
                 NavigationService.Navigate(new Index());
             }
         }

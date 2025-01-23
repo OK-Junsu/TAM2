@@ -7,7 +7,7 @@ namespace TestView
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal static APIFunctions Api;
+        internal static ApiHelper Api;
         private const string uri = "https://localhost:7297";
         private const string apiRoot = "api/Attendances";
 

@@ -41,6 +41,11 @@ namespace TestView
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            Save();
+        }
+
+        private async void Save()
+        {
             var newItem = new Attendance()
             {
                 Id = id,
@@ -49,7 +54,7 @@ namespace TestView
                 Leave = Convert.ToDateTime(Leave.Text)
             };
 
-            Task.Run(async () => await MainWindow.Api.Create(newItem));
+            await MainWindow.Api.Create(newItem);
 
             NavigationService.Navigate(new Index());
         }
