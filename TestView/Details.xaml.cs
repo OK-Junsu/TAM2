@@ -32,9 +32,10 @@ namespace TestView
             viewModel = new()
             {
                 Id = item.Id.ToString(),
-                Name = item.Name?.ToString() ?? string.Empty,
-                Arrive = item.Arrive.ToString() ?? DateTime.MinValue.ToString(),
-                Leave = item.Leave.ToString() ?? DateTime.MinValue.ToString()
+                UserId = item.UserId.ToString(),
+                Date = item.Date.ToString(),
+                Time = item.Time.ToString(),
+                State = item.State.ToString()
             };
         }
 

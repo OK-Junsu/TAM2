@@ -3,7 +3,7 @@ using TAM2.Models;
 
 namespace TestView.ViewModels
 {
-    public class AttendanceViewModel() : Notifier
+    public class AttendanceViewModel : Notifier
     {
         public string Quantity
         {
@@ -16,7 +16,7 @@ namespace TestView.ViewModels
         }
         private string _Quantity;
         
-        public ObservableCollection<Attendance> Attendances
+        public ObservableCollection<DetailViewModel> Attendances
         {
             get => _Attendances;
             set
@@ -25,6 +25,6 @@ namespace TestView.ViewModels
                 OnPropertyChanged(nameof(Attendances));
             }
         }
-        private ObservableCollection<Attendance> _Attendances;
+        private ObservableCollection<DetailViewModel> _Attendances;
     }
 }

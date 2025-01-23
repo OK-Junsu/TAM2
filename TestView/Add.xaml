@@ -26,22 +26,27 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
                    Text="Add" Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBlock Text="Name : " Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
-            <TextBox x:Name="Name" Text="{Binding Name}" Margin="5 0 0 0" FontSize="14" Width="100"/>
+            <TextBlock Text="User ID : " Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
+            <TextBox x:Name="UserId" Text="{Binding UserId}" Margin="5 0 0 0" FontSize="14" Width="100"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <TextBlock Text="Arrive : " Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
-            <TextBox x:Name="Arrive" Text="{Binding Arrive}" Margin="5 0 0 0" FontSize="14" Width="170"/>
+            <TextBlock Text="Date : " Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
+            <TextBox x:Name="Date" Text="{Binding Date}" Margin="5 0 0 0" FontSize="14" Width="170"/>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <TextBlock Text="Leave : " Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
-            <TextBox x:Name="Leave" Text="{Binding Leave}" Margin="5 0 0 0" FontSize="14" Width="170"/>
+            <TextBlock Text="Time : " Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
+            <TextBox x:Name="Time" Text="{Binding Time}" Margin="5 0 0 0" FontSize="14" Width="170"/>
         </StackPanel>
-        <StackPanel Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="5 5 0 0">
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <TextBlock Text="State : " Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
+            <TextBox x:Name="State" Text="{Binding State}" Margin="5 0 0 0" FontSize="14" Width="170"/>
+        </StackPanel>
+        <StackPanel Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="5 5 0 0">
             <Button Content="Home" Width="40" Height="20" Click="Home_Click"/>
             <Button Content="Save" Width="40" Height="20" Click="Save_Click" Margin="5 0 0 0"/>
         </StackPanel>

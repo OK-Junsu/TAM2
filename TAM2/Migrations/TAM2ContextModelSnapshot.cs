@@ -23,18 +23,149 @@ namespace TAM2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Arrive")
+                    b.Property<DateOnly>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Leave")
+                    b.Property<DateTime>("DateAndTimeOfDeletion")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
+                    b.Property<DateTime>("DateAndTimeOfRegistration")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.ToTable("Attendance");
+                });
+
+            modelBuilder.Entity("TAM2.Models.NonBusinessDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateAndTimeOfDeletion")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateAndTimeOfRegistration")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<TimeSpan>("ReducedTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NonBusinessDay");
+                });
+
+            modelBuilder.Entity("TAM2.Models.PaidTimeOff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateAndTimeOfDeletion")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateAndTimeOfRegistration")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaidTimeOff");
+                });
+
+            modelBuilder.Entity("TAM2.Models.TimeOff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateAndTimeOfDeletion")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateAndTimeOfRegistration")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TimeOff");
+                });
+
+            modelBuilder.Entity("TAM2.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateAndTimeOfDeletion")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateAndTimeOfRegistration")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("Join")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly?>("Left")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }

@@ -29,8 +29,6 @@ namespace TestView
         {
             viewModel = new()
             {
-                Arrive = DateTime.Now.ToString(),
-                Leave = DateTime.Now.ToString()
             };
         }
 
@@ -49,9 +47,10 @@ namespace TestView
             var newItem = new Attendance()
             {
                 Id = id,
-                Name = Name.Text,
-                Arrive = Convert.ToDateTime(Arrive.Text),
-                Leave = Convert.ToDateTime(Leave.Text)
+                UserId = Convert.ToInt32(UserId.Text),
+                Date = DateOnly.Parse(Date.Text),
+                Time = TimeOnly.Parse(Time.Text),
+                State = State.Text
             };
 
             await MainWindow.Api.Create(newItem);

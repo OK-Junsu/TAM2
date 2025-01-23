@@ -1,6 +1,6 @@
 ﻿namespace TestView.ViewModels
 {
-    public class DetailViewModel() : Notifier
+    public class DetailViewModel : Notifier
     {
         public string Id
         {
@@ -12,35 +12,49 @@
             }
         }
         private string _Id;
-        public string Name
+
+        public string UserId
         {
-            get => _Name;
+            get => _UserId;
             set
             {
-                _Name = value;
-                OnPropertyChanged(nameof(Name));
+                _UserId = value;
+                OnPropertyChanged(nameof(UserId));
             }
         }
-        private string _Name;
-        public string Arrive
+        private string _UserId;
+
+        public string Date
         {
-            get => _Arrive;
+            get => _Date;
             set
             {
-                _Arrive = value;
-                OnPropertyChanged(nameof(Arrive));
+                _Date = value;
+                OnPropertyChanged(nameof(Date));
             }
         }
-        private string _Arrive;
-        public string Leave
+        private string _Date;
+
+        public string Time
         {
-            get => _Leave;
+            get => _Time;
             set
             {
-                _Leave = value;
-                OnPropertyChanged(nameof(Leave));
+                _Time = value;
+                OnPropertyChanged(nameof(Time));
             }
         }
-        private string _Leave;
+        private string _Time;
+
+        public string State
+        {
+            get => _State;
+            set
+            {
+                _State = value;
+                OnPropertyChanged(nameof(State));
+            }
+        }
+        private string _State;
     }
 }

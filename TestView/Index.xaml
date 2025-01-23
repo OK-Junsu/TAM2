@@ -33,9 +33,10 @@
                   Margin="5" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ItemsSource="{Binding Attendances}" FontWeight="Bold">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" FontWeight="Normal"/>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" FontWeight="Normal"/>
-                <DataGridTextColumn Binding="{Binding Arrive}" Header="Arrive" FontWeight="Normal"/>
-                <DataGridTextColumn Binding="{Binding Leave}" Header="Leave" FontWeight="Normal"/>
+                <DataGridTextColumn Binding="{Binding UserId}" Header="UserId" FontWeight="Normal"/>
+                <DataGridTextColumn Binding="{Binding Date}" Header="Date" FontWeight="Normal"/>
+                <DataGridTextColumn Binding="{Binding Time}" Header="Time" FontWeight="Normal"/>
+                <DataGridTextColumn Binding="{Binding State}" Header="State" FontWeight="Normal"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

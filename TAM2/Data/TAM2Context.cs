@@ -15,5 +15,9 @@ namespace TAM2.Data
         }
 
         public DbSet<TAM2.Models.Attendance> Attendance { get; set; } = default!;
+        public DbSet<TAM2.Models.User> User { get; set; } = default!;
+        public DbSet<TAM2.Models.TimeOff> TimeOff { get; set; } = default!;
+        public DbSet<TAM2.Models.PaidTimeOff> PaidTimeOff { get; set; } = default!;
+        public DbSet<TAM2.Models.NonBusinessDay> NonBusinessDay { get; set; } = default!;
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TAM2.Models;
@@ -26,13 +25,22 @@ namespace TestView
 
         private void SetViewModel()
         {
-            viewModel.Attendances = Task.Run(MainWindow.Api.Get<ObservableCollection<Attendance>>)?.Result ?? [];
+            if (!(viewModel.Attendances?.Any() ?? false)) viewModel.Attendances = [];
+            viewModel.Attendances.Clear();
+            (Task.Run(MainWindow.Api.Get<List<Attendance>>)?.Result ?? []).ForEach(e => viewModel.Attendances.Add(new DetailViewModel()
+            {
+                Id = e.Id.ToString(),
+                UserId = e.UserId.ToString(),
+                Date = e.Date.ToString(),
+                Time = e.Time.ToString(),
+                State = e.State
+            }));
             viewModel.Quantity = $"{viewModel.Attendances.Count} {(viewModel.Attendances.Count <= 1 ? "attendance" : "attendances")}";
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            var id = viewModel.Attendances.Count > 0 ? viewModel.Attendances.Max(e => e.Id) + 1 : 1;
+            var id = viewModel.Attendances.Count > 0 ? viewModel.Attendances.Max(e => Convert.ToInt32(e.Id)) + 1 : 1;
 
             NavigationService.Navigate(new Add(id));
         }
@@ -51,7 +59,7 @@ namespace TestView
         private int GetItemId(object sender)
         {
             var index = GetIndexOfDataGrid(sender);
-            return index != -1 ? viewModel.Attendances[index].Id : throw new ArgumentException("Can't Find Item");
+            return index != -1 ? Convert.ToInt32(viewModel.Attendances[index].Id) : throw new ArgumentException("Can't Find Item");
         }
 
         private void Details_Click(object sender, RoutedEventArgs e)

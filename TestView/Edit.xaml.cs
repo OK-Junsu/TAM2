@@ -32,9 +32,10 @@ namespace TestView
             viewModel = new()
             {
                 Id = item.Id.ToString(),
-                Name = item.Name?.ToString() ?? string.Empty,
-                Arrive = item.Arrive.ToString() ?? DateTime.MinValue.ToString(),
-                Leave = item.Leave.ToString() ?? DateTime.MinValue.ToString()
+                UserId = item.UserId.ToString(),
+                Date = item.Date.ToString(),
+                Time = item.Time.ToString(),
+                State = item.State.ToString()
             };
         }
 
@@ -53,9 +54,10 @@ namespace TestView
             var newItem = new Attendance()
             {
                 Id = id,
-                Name = Name.Text,
-                Arrive = Convert.ToDateTime(Arrive.Text),
-                Leave = Convert.ToDateTime(Leave.Text)
+                UserId = Convert.ToInt32(UserId.Text),
+                Date = DateOnly.Parse(Date.Text),
+                Time = TimeOnly.Parse(Time.Text),
+                State = State.Text
             };
 
             await MainWindow.Api.Update(newItem, id);
