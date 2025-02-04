@@ -11,7 +11,7 @@
                 OnPropertyChanged(nameof(Id));
             }
         }
-        private string _Id;
+        private string _Id = default!;
 
         public string UserId
         {
@@ -22,7 +22,7 @@
                 OnPropertyChanged(nameof(UserId));
             }
         }
-        private string _UserId;
+        private string _UserId = default!;
 
         public string Date
         {
@@ -33,7 +33,7 @@
                 OnPropertyChanged(nameof(Date));
             }
         }
-        private string _Date;
+        private string _Date = default!;
 
         public string Time
         {
@@ -44,7 +44,7 @@
                 OnPropertyChanged(nameof(Time));
             }
         }
-        private string _Time;
+        private string _Time = default!;
 
         public string State
         {
@@ -55,6 +55,17 @@
                 OnPropertyChanged(nameof(State));
             }
         }
-        private string _State;
+        private string _State = default!;
+
+        public bool IsDeleted
+        {
+            get => _IsDeleted;
+            set
+            {
+                _IsDeleted = value;
+                OnPropertyChanged(nameof(IsDeleted));
+            }
+        }
+        private bool _IsDeleted;
     }
 }

@@ -10,7 +10,7 @@ namespace TestView
     /// </summary>
     public partial class Details : Page
     {
-        private DetailViewModel viewModel;
+        private readonly DetailViewModel viewModel = new();
         private readonly int id;
 
 
@@ -29,14 +29,11 @@ namespace TestView
         {
             var item = Task.Run(() => MainWindow.Api.Get<Attendance>(id))?.Result ?? new();
 
-            viewModel = new()
-            {
-                Id = item.Id.ToString(),
-                UserId = item.UserId.ToString(),
-                Date = item.Date.ToString(),
-                Time = item.Time.ToString(),
-                State = item.State.ToString()
-            };
+            viewModel.Id = item.Id.ToString();
+            viewModel.UserId = item.UserId.ToString();
+            viewModel.Date = item.Date.ToString("yyyy-MM-dd");
+            viewModel.Time = item.Time?.ToString("HH:mm") ?? string.Empty;
+            viewModel.State = item.State.ToString();
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)

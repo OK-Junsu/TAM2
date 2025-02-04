@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TAM2.Models
 {
@@ -13,6 +12,6 @@ namespace TAM2.Models
         [DataType(DataType.Date)]
         public DateOnly Date { get; set; }
         //public DayState Type { get; set; }
-        public string Type { get; set; }
+        public string Type { get; set; } = default!;
     }
 }

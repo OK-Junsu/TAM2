@@ -7,16 +7,17 @@ namespace TestView
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal static ApiHelper Api;
         private const string uri = "https://localhost:7297";
         private const string apiRoot = "api/Attendances";
+        internal static ApiHelper Api = new(uri, apiRoot);
+        internal static bool IsIncludeDeletedItems { get; set; }
 
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Api = new(uri, apiRoot);
+            IsIncludeDeletedItems = true;
             frame.Content = new Index();
         }
     }

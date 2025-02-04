@@ -19,10 +19,10 @@ namespace TAM2.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    Time = table.Column<TimeOnly>(type: "TEXT", nullable: false),
+                    Time = table.Column<TimeOnly>(type: "TEXT", nullable: true),
                     State = table.Column<string>(type: "TEXT", nullable: false),
                     DateAndTimeOfRegistration = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -40,7 +40,7 @@ namespace TAM2.Migrations
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
                     ReducedTime = table.Column<TimeSpan>(type: "TEXT", nullable: false),
                     DateAndTimeOfRegistration = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -58,7 +58,7 @@ namespace TAM2.Migrations
                     Year = table.Column<int>(type: "INTEGER", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     DateAndTimeOfRegistration = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -76,7 +76,7 @@ namespace TAM2.Migrations
                     Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     Type = table.Column<string>(type: "TEXT", nullable: false),
                     DateAndTimeOfRegistration = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -94,7 +94,7 @@ namespace TAM2.Migrations
                     Join = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     Left = table.Column<DateOnly>(type: "TEXT", nullable: true),
                     DateAndTimeOfRegistration = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateAndTimeOfDeletion = table.Column<DateTime>(type: "TEXT", nullable: true),
                     IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

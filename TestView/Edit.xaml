@@ -49,7 +49,7 @@
         </StackPanel>
         <StackPanel Grid.Row="6" Orientation="Horizontal">
             <TextBlock Text="State : " Margin="5 0 0 0" FontSize="14" FontWeight="Bold"/>
-            <TextBox x:Name="State" Text="{Binding State}" Margin="5 0 0 0" FontSize="14" Width="170"/>
+            <ComboBox x:Name="StateComboBox" MinWidth="100" SelectedValue="{Binding State}" VerticalContentAlignment="Center" SelectionChanged="StateComboBox_SelectionChanged"/>
         </StackPanel>
         <StackPanel Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="5 5 0 0">
             <Button Content="Home" Width="40" Height="20" Click="Home_Click"/>

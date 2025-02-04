@@ -5,6 +5,18 @@ namespace TestView.ViewModels
 {
     public class AttendanceViewModel : Notifier
     {
+        public bool IsIncludeDeletedItems
+        {
+            get => _IsIncludeDeletedItems;
+            set
+            {
+                _IsIncludeDeletedItems = value;
+                OnPropertyChanged(nameof(IsIncludeDeletedItems));
+                MainWindow.IsIncludeDeletedItems = value;
+            }
+        }
+        private bool _IsIncludeDeletedItems;
+        
         public string Quantity
         {
             get => _Quantity;
@@ -14,7 +26,7 @@ namespace TestView.ViewModels
                 OnPropertyChanged(nameof(Quantity));
             }
         }
-        private string _Quantity;
+        private string _Quantity = default!;
         
         public ObservableCollection<DetailViewModel> Attendances
         {
@@ -25,6 +37,6 @@ namespace TestView.ViewModels
                 OnPropertyChanged(nameof(Attendances));
             }
         }
-        private ObservableCollection<DetailViewModel> _Attendances;
+        private ObservableCollection<DetailViewModel> _Attendances = [];
     }
 }

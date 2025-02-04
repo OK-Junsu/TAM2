@@ -10,7 +10,8 @@ namespace TestView
     /// </summary>
     public partial class Edit : Page
     {
-        private DetailViewModel viewModel;
+        private readonly bool isInitialized;
+        private readonly DetailViewModel viewModel = new();
         private readonly int id;
 
 
@@ -18,25 +19,27 @@ namespace TestView
         {
             InitializeComponent();
 
+            StateComboBox.ItemsSource = DayState.UserSelectables();
+
             this.id = id;
             SetViewModel();
 
             DataContext = viewModel;
+            isInitialized = true;
         }
 
 
+        private Attendance GetItem() => Task.Run(() => MainWindow.Api.Get<Attendance>(id))?.Result ?? new();
+
         private void SetViewModel()
         {
-            var item = Task.Run(() => MainWindow.Api.Get<Attendance>(id))?.Result ?? new();
+            var item = GetItem();
 
-            viewModel = new()
-            {
-                Id = item.Id.ToString(),
-                UserId = item.UserId.ToString(),
-                Date = item.Date.ToString(),
-                Time = item.Time.ToString(),
-                State = item.State.ToString()
-            };
+            viewModel.Id = item.Id.ToString();
+            viewModel.UserId = item.UserId.ToString();
+            viewModel.Date = item.Date.ToString("yyyy-MM-dd");
+            viewModel.Time = item.Time?.ToString("HH:mm") ?? string.Empty;
+            viewModel.State = item.State.ToString();
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -51,18 +54,50 @@ namespace TestView
 
         private async void Save()
         {
-            var newItem = new Attendance()
-            {
-                Id = id,
-                UserId = Convert.ToInt32(UserId.Text),
-                Date = DateOnly.Parse(Date.Text),
-                Time = TimeOnly.Parse(Time.Text),
-                State = State.Text
-            };
+            var item = GetItem();
 
-            await MainWindow.Api.Update(newItem, id);
+            if (!item.IsDeleted)
+            {
+                item.UserId = Convert.ToInt32(UserId.Text);
+                item.Date = DateOnly.Parse(Date.Text);
+                item.Time = string.IsNullOrEmpty(Time.Text) ? null : TimeOnly.Parse(Time.Text);
+                item.State = StateComboBox.SelectedValue?.ToString() ?? string.Empty;
+
+                await MainWindow.Api.Update(item, id);
+            }
+            else
+                MessageBox.Show("Can Not Save Changes" + "\r\n" +
+                                "This Item is Already Deleted",
+                                "Warning",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning,
+                                MessageBoxResult.OK);
 
             NavigationService.Navigate(new Index());
+        }
+
+        private void StateComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!isInitialized) return;
+
+            var selected = StateComboBox.SelectedValue?.ToString();
+            if (!string.IsNullOrEmpty(selected))
+            {
+                var state = new DayState(selected).Value;
+
+                viewModel.Time = state switch
+                {
+                    DayStateType.Arrive or
+                    DayStateType.Leave => DateTime.Now.ToString("HH:mm"),
+                    _ => string.Empty,
+                };
+                Time.IsReadOnly = state switch
+                {
+                    DayStateType.Arrive or
+                    DayStateType.Leave => false,
+                    _ => true,
+                };
+            }
         }
     }
 }

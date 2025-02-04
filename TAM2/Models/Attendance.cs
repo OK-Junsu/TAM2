@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TAM2.Models
 {
@@ -10,9 +9,9 @@ namespace TAM2.Models
         [DataType(DataType.Date)]
         public DateOnly Date { get; set; }
         [DataType(DataType.Time)]
-        public TimeOnly Time { get; set; }
+        public TimeOnly? Time { get; set; }
         //public DayState State { get; set; }
-        public string State { get; set; }
+        public string State { get; set; } = default!;
     }
 
     public readonly struct DayState
@@ -21,6 +20,7 @@ namespace TAM2.Models
         private readonly DayStateType _value;
 
         public DayState(DayStateType value) => _value = value;
+        private DayState(int value) => _value = (DayStateType)value;
         public DayState(string value) : this(ToEnum(value)) { }
 
         public override string ToString() => _value.ToString();
@@ -34,11 +34,16 @@ namespace TAM2.Models
                 "Leave" => DayStateType.Leave,
                 "HalfDayOff" => DayStateType.HalfDayOff,
                 "DayOff" => DayStateType.DayOff,
-                _ => default
+                _ => throw new InvalidOperationException("Invalid Parameter, Please Check Again")
             };
         }
 
+        public static DayState Default() => new(0);
+
         public static DayState Parse(string s) => new(s);
+
+        public static string[] Possibles() => Enum.GetNames<DayStateType>();
+        public static string[] UserSelectables() => Possibles().Except([DayStateType.Absence.ToString()]).ToArray();
     }
 
     public enum DayStateType

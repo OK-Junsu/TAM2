@@ -10,7 +10,8 @@ namespace TestView
     /// </summary>
     public partial class Add : Page
     {
-        private DetailViewModel viewModel;
+        private readonly bool isInitialized;
+        private readonly DetailViewModel viewModel = new();
         private readonly int id;
 
 
@@ -18,18 +19,21 @@ namespace TestView
         {
             InitializeComponent();
 
+            StateComboBox.ItemsSource = DayState.UserSelectables();
+
             this.id = id;
             SetViewModel();
 
             DataContext = viewModel;
+            isInitialized = true;
         }
 
 
         private void SetViewModel()
         {
-            viewModel = new()
-            {
-            };
+            viewModel.Date = DateTime.Now.ToString("yyyy-MM-dd");
+            viewModel.Time = DateTime.Now.ToString("HH:mm");
+            viewModel.State = DayStateType.Arrive.ToString();
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -44,18 +48,53 @@ namespace TestView
 
         private async void Save()
         {
+            if (string.IsNullOrEmpty(UserId.Text) || Convert.ToInt32(UserId.Text) <= 0)
+            {
+                MessageBox.Show("Must Enter User ID",
+                                "Warning",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                return;
+            }
+
             var newItem = new Attendance()
             {
                 Id = id,
                 UserId = Convert.ToInt32(UserId.Text),
                 Date = DateOnly.Parse(Date.Text),
-                Time = TimeOnly.Parse(Time.Text),
-                State = State.Text
+                Time = string.IsNullOrEmpty(Time.Text) ? null : TimeOnly.Parse(Time.Text),
+                State = StateComboBox.SelectedValue?.ToString() ?? string.Empty,
             };
+
+            newItem.Register();
 
             await MainWindow.Api.Create(newItem);
 
             NavigationService.Navigate(new Index());
+        }
+
+        private void StateComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!isInitialized) return;
+
+            var selected = StateComboBox.SelectedValue?.ToString();
+            if (!string.IsNullOrEmpty(selected))
+            {
+                var state = new DayState(selected).Value;
+
+                viewModel.Time = state switch
+                {
+                    DayStateType.Arrive or
+                    DayStateType.Leave => DateTime.Now.ToString("HH:mm"),
+                    _ => string.Empty,
+                };
+                Time.IsReadOnly = state switch
+                {
+                    DayStateType.Arrive or
+                    DayStateType.Leave => false,
+                    _ => true,
+                };
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ namespace TAM2.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DateAndTimeOfDeletion")
+                    b.Property<DateTime?>("DateAndTimeOfDeletion")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateAndTimeOfRegistration")
@@ -39,7 +39,7 @@ namespace TAM2.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<TimeOnly>("Time")
+                    b.Property<TimeOnly?>("Time")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserId")
@@ -59,7 +59,7 @@ namespace TAM2.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DateAndTimeOfDeletion")
+                    b.Property<DateTime?>("DateAndTimeOfDeletion")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateAndTimeOfRegistration")
@@ -85,7 +85,7 @@ namespace TAM2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DateAndTimeOfDeletion")
+                    b.Property<DateTime?>("DateAndTimeOfDeletion")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateAndTimeOfRegistration")
@@ -117,7 +117,7 @@ namespace TAM2.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DateAndTimeOfDeletion")
+                    b.Property<DateTime?>("DateAndTimeOfDeletion")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateAndTimeOfRegistration")
@@ -144,7 +144,7 @@ namespace TAM2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("DateAndTimeOfDeletion")
+                    b.Property<DateTime?>("DateAndTimeOfDeletion")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateAndTimeOfRegistration")

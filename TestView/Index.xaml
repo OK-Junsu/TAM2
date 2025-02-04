@@ -37,6 +37,7 @@
                 <DataGridTextColumn Binding="{Binding Date}" Header="Date" FontWeight="Normal"/>
                 <DataGridTextColumn Binding="{Binding Time}" Header="Time" FontWeight="Normal"/>
                 <DataGridTextColumn Binding="{Binding State}" Header="State" FontWeight="Normal"/>
+                <DataGridTextColumn Binding="{Binding IsDeleted}" Header="IsDeleted" FontWeight="Normal"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -58,10 +59,18 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Hard Delete" Click="DeletePermanently_Click" FontWeight="Normal" Background="LightPink"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="5 5 0 0">
             <Button Content="Add" Width="40" Height="20" Click="Add_Click"/>
+            <CheckBox x:Name="IncludeCheckBox" Content="Include Deleted Items" IsChecked="{Binding IsIncludeDeletedItems}" Checked="IncludeCheckBox_Checked" Unchecked="IncludeCheckBox_Unchecked" Margin="10 0 0 0" VerticalContentAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Page>
